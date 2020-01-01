@@ -1,0 +1,37 @@
+
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+kind: StatefulSet
+metadata:
+  name: web
+  labels:
+    app: birthday
+spec:
+  serviceName: "birthday-app"
+  selector:
+    matchLabels:
+      app: birthday
+  replicas: 3
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: birthday
+    spec:
+      containers:
+      - name: birthday-service
+        image: gcr.io/vocal-tempo-259712/birthday_service:v2
+        ports:
+        - containerPort: 8080
+          name: web
+        volumeMounts:
+        - name: pvc-birthday-cfg
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: pvc-birthday-cfg
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
