@@ -26,7 +26,7 @@ docker build -t birthday-service:v1
 **4. Upload the docker image to GCR**
 
 ```bash
-docker build -t birthday-service:v1
+docker push gcr.io/${PROJECT_ID}/birthday-service:v1
 
 ```
 
