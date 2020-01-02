@@ -61,7 +61,7 @@ public class BirthdayControllerTests {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		this.mockMvc.perform(put("/hello/SureshChinnaswamy").contentType(MediaType.APPLICATION_JSON)
-				.content("{\"birthDate\":\"2000-01-01\"}")).andExpect(status().isOk());
+				.content("{\"birthDate\":\"2000-01-01\"}")).andExpect(status().isNoContent());
 	}
 
 	@Before
