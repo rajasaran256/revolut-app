@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: birthday-service
-        image: gcr.io/vocal-tempo-259712/birthday_service:v2
+        image: gcr.io/vocal-tempo-259712/birthday-service:v1
         ports:
         - containerPort: 8080
           name: web
