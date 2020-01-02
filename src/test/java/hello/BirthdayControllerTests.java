@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.text.SimpleDateFormat;
@@ -35,15 +35,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-
+@ActiveProfiles("dev")
 public class BirthdayControllerTests {
 
 	@InjectMocks
@@ -60,8 +60,8 @@ public class BirthdayControllerTests {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-		this.mockMvc.perform(put("/hello/SureshChinnaswamy").contentType(MediaType.APPLICATION_JSON)
-				.content("{\"birthDate\":\"2000-01-01\"}")).andExpect(status().isOk());
+		this.mockMvc.perform(put("/hello/RajasaranSilambu").contentType(MediaType.APPLICATION_JSON)
+				.content("{\"birthDate\":\"2000-01-01\"}")).andExpect(status().isNoContent());
 	}
 
 	@Before
@@ -74,12 +74,12 @@ public class BirthdayControllerTests {
 	public void getUserBirthdayTest() throws Exception {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String userName = "SureshChinnaswamy";
+		String userName = "RajasaranSilambu";
 
 		when(birthdayService.getUserBirthday(userName)).thenReturn(sdf.format(new Date()));
 
-		this.mockMvc.perform(get("/hello/SureshChinnaswamy")).andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string("Hello, SureshChinnaswamy! Happy  Birthday"));
+		this.mockMvc.perform(get("/hello/RajasaranSilambu")).andDo(print()).andExpect(status().isOk())
+				.andExpect(content().string("Hello, RajasaranSilambu! Happy  Birthday"));
 	}
 
 }
