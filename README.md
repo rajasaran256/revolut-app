@@ -19,7 +19,7 @@ mvn clean install
 **3. Build docker image**
 
 ```bash
-docker build -t birthday-service:v1
+docker build -t gcr.io/${PROJECT_ID}/birthday-service:v1 .
 
 ```
 
